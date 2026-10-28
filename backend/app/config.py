@@ -37,9 +37,15 @@ class BaseConfig:
         if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
             SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
     elif _IS_SERVERLESS or os.getenv("USE_SQLITE", "false").lower() in ("1", "true"):
+        # On Vercel, /tmp is the only writable directory; copy the seed DB there at runtime
+        # (see app/__init__.py create_app for the copy logic)
         SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/campus_energy.db"
     else:
         SQLALCHEMY_DATABASE_URI = _DEFAULT_MYSQL_URI
+
+    # Vercel serverless: disable connection pooling (each invocation is stateless)
+    if _IS_SERVERLESS:
+        SQLALCHEMY_ENGINE_OPTIONS = {"pool_size": 1, "max_overflow": 0, "connect_args": {"check_same_thread": False}}
 
     # ── HDFS + Spark Configuration ─────────────────────────────
     # The Flask API never reads these directly.
