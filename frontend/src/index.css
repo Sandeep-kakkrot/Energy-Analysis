@@ -1,0 +1,537 @@
+/* ─── Google Font: Space Grotesk ────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES — TEAL THEME
+═══════════════════════════════════════════════════════════ */
+:root {
+  /* Dark theme defaults */
+  --bg-primary:       #020d14;
+  --bg-secondary:     #031824;
+  --bg-card:          rgba(4, 20, 32, 0.82);
+  --bg-card-hover:    rgba(6, 28, 44, 0.9);
+  --bg-glass:         rgba(2, 18, 28, 0.75);
+  --bg-input:         rgba(3, 15, 24, 0.9);
+  --border-color:     rgba(0, 196, 167, 0.15);
+  --border-hover:     rgba(0, 196, 167, 0.4);
+  --border-subtle:    rgba(0, 212, 193, 0.08);
+  --accent:           #00c4a7;
+  --accent-bright:    #00e5b8;
+  --accent-glow:      rgba(0, 196, 167, 0.35);
+  --accent-glow-sm:   rgba(0, 196, 167, 0.2);
+  --text-primary:     #e0fff8;
+  --text-secondary:   #7ab8b0;
+  --text-muted:       #3d6b65;
+  --text-faint:       #1e3d38;
+  --scrollbar-thumb:  #0d3d35;
+}
+
+[data-theme='light'], .light-theme {
+  --bg-primary:       #e8f5f3;
+  --bg-secondary:     #f0faf8;
+  --bg-card:          rgba(255, 255, 255, 0.88);
+  --bg-card-hover:    rgba(255, 255, 255, 0.98);
+  --bg-glass:         rgba(240, 250, 248, 0.82);
+  --bg-input:         rgba(255, 255, 255, 0.95);
+  --border-color:     rgba(0, 168, 147, 0.2);
+  --border-hover:     rgba(0, 168, 147, 0.5);
+  --border-subtle:    rgba(0, 196, 167, 0.1);
+  --accent:           #009688;
+  --accent-bright:    #00c4a7;
+  --accent-glow:      rgba(0, 150, 136, 0.2);
+  --accent-glow-sm:   rgba(0, 150, 136, 0.12);
+  --text-primary:     #0a2520;
+  --text-secondary:   #1a5750;
+  --text-muted:       #4a8a82;
+  --text-faint:       #a0c8c2;
+  --scrollbar-thumb:  #b0d8d2;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  cursor: none;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  min-height: 100vh;
+  line-height: 1.6;
+  cursor: none;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Also hide cursor on interactive elements */
+a, button, input, select, textarea, [role="button"], label { cursor: none !important; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+#root { min-height: 100vh; display: flex; }
+
+
+/* Layout wrapper */
+.layout-root {
+  min-height: 100vh;
+  display: flex;
+  width: 100%;
+}
+
+
+#uc-cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  mix-blend-mode: normal;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+#uc-cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  transition: width 0.35s cubic-bezier(0.22,1,0.36,1),
+              height 0.35s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.25s ease,
+              opacity 0.25s ease;
+}
+body.cursor-hover #uc-cursor-dot {
+  width: 12px; height: 12px;
+  background: var(--accent-bright);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+body.cursor-hover #uc-cursor-ring {
+  width: 52px; height: 52px;
+  border-color: var(--accent-bright);
+  opacity: 0.7;
+}
+body.cursor-click #uc-cursor-dot {
+  width: 6px; height: 6px;
+}
+body.cursor-click #uc-cursor-ring {
+  width: 28px; height: 28px;
+  border-color: var(--accent-bright);
+}
+
+/* ─── Custom Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════
+   COMPONENT LAYER — Teal Energy Theme
+═══════════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── Base card — glassmorphism ───────────────────────── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(0,212,193,0.06);
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  .card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px var(--accent-glow-sm), 0 0 32px var(--accent-glow-sm);
+    transform: translateY(-2px);
+  }
+
+  /* ── Glass card ──────────────────────────────────────── */
+  .glass-card {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+  }
+  .glass-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 24px var(--accent-glow-sm);
+    transform: translateY(-2px);
+  }
+
+  /* ── KPI Card ────────────────────────────────────────── */
+  .kpi-card {
+    @apply card p-5 flex flex-col gap-4;
+    animation: slideUp 0.45s ease-out both;
+  }
+
+  /* ── Teal top accent stripe ──────────────────────────── */
+  .uc-stripe {
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-bright) 50%, transparent 100%);
+    border-radius: 2px 2px 0 0;
+  }
+
+  /* ── Sidebar nav item ────────────────────────────────── */
+  .nav-item {
+    @apply relative flex items-center gap-3 px-4 py-2.5 rounded-xl
+           text-[12px] font-semibold uppercase tracking-widest
+           transition-all duration-200 cursor-none select-none;
+    letter-spacing: 0.07em;
+    color: var(--text-secondary);
+  }
+  .nav-item:hover {
+    background: rgba(0, 196, 167, 0.08);
+    color: var(--text-primary);
+  }
+  .nav-item.active {
+    background: rgba(0, 196, 167, 0.12);
+    color: var(--text-primary);
+    border: 1px solid rgba(0, 196, 167, 0.28);
+    box-shadow: inset 3px 0 0 var(--accent), 0 0 16px rgba(0,196,167,0.08);
+  }
+  .nav-item.active .nav-icon { color: var(--accent-bright); }
+  .nav-item .nav-badge {
+    @apply ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded-full;
+    background: rgba(0, 196, 167, 0.15);
+    color: var(--accent-bright);
+    border: 1px solid rgba(0, 196, 167, 0.25);
+  }
+
+  /* ── Status pill ─────────────────────────────────────── */
+  .pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1
+           rounded-full text-[11px] font-semibold border uppercase tracking-wider;
+  }
+  .pill-success { background: rgba(34,197,94,0.1);  color: #4ade80; border-color: rgba(34,197,94,0.2); }
+  .pill-warning { background: rgba(251,191,36,0.1); color: #fbbf24; border-color: rgba(251,191,36,0.2); }
+  .pill-danger  { background: rgba(239,68,68,0.1);  color: #f87171; border-color: rgba(239,68,68,0.2); }
+  .pill-brand   { background: rgba(0,196,167,0.1);  color: var(--accent-bright); border-color: rgba(0,196,167,0.25); }
+
+  /* ── Section title ───────────────────────────────────── */
+  .section-title {
+    @apply text-sm font-bold flex items-center gap-2 uppercase tracking-widest;
+    color: var(--text-primary);
+  }
+
+  /* ── Table ───────────────────────────────────────────── */
+  .data-table { @apply w-full text-[13px]; }
+  .data-table thead tr { border-bottom: 1px solid var(--border-subtle); }
+  .data-table thead th {
+    @apply py-3 px-4 text-left text-[11px] font-bold uppercase tracking-wider whitespace-nowrap;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+  .data-table tbody tr {
+    border-bottom: 1px solid var(--border-subtle);
+    transition: all 0.2s ease;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(0, 196, 167, 0.04);
+    transform: translateX(2px);
+  }
+  .data-table tbody td { @apply py-3.5 px-4; color: var(--text-secondary); }
+
+  /* ── Chip / filter button ────────────────────────────── */
+  .chip {
+    @apply px-3.5 py-1.5 rounded-lg text-[12px] font-semibold border
+           transition-all duration-200 cursor-none uppercase tracking-wider;
+  }
+  .chip-active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .chip-idle {
+    background: rgba(0, 196, 167, 0.05);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+  }
+  .chip-idle:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+    background: rgba(0, 196, 167, 0.1);
+  }
+
+  /* ── Icon box ────────────────────────────────────────── */
+  .icon-box {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0;
+  }
+
+  /* ── Teal primary button ─────────────────────────────── */
+  .btn-uc {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+           text-[13px] font-bold uppercase tracking-widest
+           transition-all duration-200;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .btn-uc:hover {
+    background: var(--accent-bright);
+    box-shadow: 0 0 32px var(--accent-glow);
+  }
+
+  /* ── Outline teal button ─────────────────────────────── */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+           text-[13px] font-bold uppercase tracking-widest
+           transition-all duration-200;
+    background: transparent;
+    color: var(--accent-bright);
+    border: 1px solid var(--border-hover);
+  }
+  .btn-outline:hover {
+    background: rgba(0, 196, 167, 0.1);
+    box-shadow: 0 0 20px var(--accent-glow-sm);
+  }
+
+  /* ── Accent bar ──────────────────────────────────────── */
+  .accent-bar {
+    @apply h-1 rounded-full;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-bright) 60%, rgba(0,229,184,0.2) 100%);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RECHARTS — teal dark palette
+═══════════════════════════════════════════════════════════ */
+.recharts-default-tooltip {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.7) !important;
+  backdrop-filter: blur(16px) !important;
+}
+.recharts-tooltip-label {
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+  margin-bottom: 5px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.recharts-tooltip-item { color: var(--text-primary) !important; font-size: 12px !important; }
+.recharts-cartesian-grid line { stroke: var(--border-subtle) !important; }
+.recharts-xAxis .recharts-cartesian-axis-tick-value,
+.recharts-yAxis .recharts-cartesian-axis-tick-value {
+  fill: var(--text-muted) !important;
+  font-size: 11px !important;
+}
+.recharts-legend-item-text {
+  color: var(--text-secondary) !important;
+  font-size: 12px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE TRANSITIONS
+═══════════════════════════════════════════════════════════ */
+.page-enter {
+  animation: pageEnter 0.42s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(18px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SKELETON SHIMMER — teal tinted
+═══════════════════════════════════════════════════════════ */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, rgba(0,196,167,0.05) 25%, rgba(0,196,167,0.1) 50%, rgba(0,196,167,0.05) 75%);
+  background-size: 1200px 100%;
+  animation: shimmer 1.8s infinite linear;
+  border-radius: 6px;
+}
+.light-theme .skeleton {
+  background: linear-gradient(90deg, #d4ede9 25%, #e4f5f2 50%, #d4ede9 75%);
+  background-size: 1200px 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PULSING DOT
+═══════════════════════════════════════════════════════════ */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════════════════ */
+@keyframes fadeIn    { from { opacity: 0; }                to { opacity: 1; } }
+@keyframes slideUp   { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideIn   { from { transform: translateX(-14px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes scaleIn   { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,196,167,0.25); }
+  50%       { box-shadow: 0 0 55px rgba(0,212,193,0.7); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0)    scale(1);    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ICON TOOLTIP
+═══════════════════════════════════════════════════════════ */
+.icon-tooltip { position: relative; }
+.icon-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--accent-bright);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 999;
+  backdrop-filter: blur(12px);
+}
+.icon-tooltip:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR OVERLAY
+═══════════════════════════════════════════════════════════ */
+.sidebar-overlay {
+  @apply fixed inset-0 bg-black/70 backdrop-blur-sm z-30 lg:hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════════════════════════════════ */
+.progress-track { @apply h-1.5 rounded-full overflow-hidden; background: rgba(0,196,167,0.1); }
+.progress-fill  { @apply h-full rounded-full transition-all duration-700 ease-out; }
+
+/* ═══════════════════════════════════════════════════════════
+   GRADIENT BORDER
+═══════════════════════════════════════════════════════════ */
+.gradient-border {
+  position: relative;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--accent), var(--accent-bright), rgba(0,229,184,0.3));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.gradient-border:hover::after { opacity: 0.4; }
+
+/* ═══════════════════════════════════════════════════════════
+   HOVER LIFT
+═══════════════════════════════════════════════════════════ */
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 24px var(--accent-glow-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TEAL GRID PATTERN (background texture)
+═══════════════════════════════════════════════════════════ */
+.uc-grid-bg {
+  background-image:
+    linear-gradient(rgba(0,196,167,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,196,167,0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ANIMATION UTILITY CLASSES
+═══════════════════════════════════════════════════════════ */
+.animate-scale-in  { animation: scaleIn 0.3s cubic-bezier(.34,1.56,.64,1) both; }
+.animate-slide-up  { animation: slideUp 0.4s ease-out both; }
+.animate-fade-in   { animation: fadeIn 0.4s ease-out both; }
+.animate-slide-in  { animation: slideIn 0.35s ease-out both; }
+.animate-glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════════════════════
+   SMOOTH THEME TRANSITION — apply on layout elements
+═══════════════════════════════════════════════════════════ */
+body, .card, aside, header, footer, nav, main {
+  transition-property: background-color, background, border-color, color, box-shadow;
+  transition-duration: 0.35s;
+  transition-timing-function: ease;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TEAL GLOW ANIMATION (login logo etc.)
+═══════════════════════════════════════════════════════════ */
+.login-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}

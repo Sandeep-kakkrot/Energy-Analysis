@@ -1,0 +1,6 @@
+timestamp,building_code,building_name,consumption_kwh,hour_of_day,day_of_week,day_of_month,month_num,year_num,is_weekend,is_holiday,off-hours_kwh,weekend_kwh,total_wastage_kwh,wastage_(%),severity,ai_recommendation
+2026-09-11 15:31:36.971782,CB-A,CB-A,5146154.6,15,4,11,9,2026,0,0,5146154.6,0.0,5146154.6,100.0,HIGH,Automated lighting/AC shutoff recommended during off-hours.
+2026-09-11 15:31:36.971782,HOST,Hostel Complex,849358.37,15,4,11,9,2026,0,0,197234.86,101981.34,299216.2,35.23,HIGH,Install occupancy-based smart switches. High overnight use detected.
+2026-09-11 15:31:36.971782,LABO,Laboratory Block B,811214.15,15,4,11,9,2026,0,0,107138.89,61162.68,168301.57,20.75,MEDIUM,Verify refrigeration/incubator necessity during weekends.
+2026-09-11 15:31:36.971782,CENT,Central Library,303771.0,15,4,11,9,2026,0,0,23880.57,13630.97,37511.54,12.35,LOW,Energy profile is healthy. Continue good practices.
+2026-09-11 15:31:36.971782,CLAS,Classroom Block A,405171.64,15,4,11,9,2026,0,0,30216.04,17008.1,47224.14,11.66,LOW,Optimal off-hours usage. Maintain current practices.

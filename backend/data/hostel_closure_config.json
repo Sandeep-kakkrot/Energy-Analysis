@@ -1,0 +1,8 @@
+{
+  "is_active": false,
+  "start_date": "2024-06-01",
+  "end_date": "2024-07-31",
+  "standby_threshold_kwh": 50.0,
+  "closure_reason": "Summer Vacation",
+  "updated_at": "2026-10-22T08:57:52.822048"
+}

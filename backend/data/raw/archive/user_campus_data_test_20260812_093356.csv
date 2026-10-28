@@ -1,0 +1,3 @@
+recorded_at,building_code,building_name,consumption_kwh,hour_of_day,day_of_week,day_of_month,month_num,year_num,is_weekend,is_holiday
+2024-01-01 00:00:00,CB-A,Classroom Block A,105.4,0,0,1,1,2024,0,0
+2024-01-01 01:00:00,CB-A,Classroom Block A,98.2,1,0,1,1,2024,0,0

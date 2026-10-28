@@ -1,0 +1,15 @@
+recorded_at,building_code,building_name,consumption_kwh,hour_of_day,day_of_week,day_of_month,month_num,year_num,is_weekend,is_holiday
+2024-01-01 00:00:00,CB-A,Classroom Block A,45.2,0,0,1,1,2024,0,1
+2024-01-01 01:00:00,CB-A,Classroom Block A,42.8,1,0,1,1,2024,0,1
+2024-01-01 02:00:00,CB-A,Classroom Block A,40.1,2,0,1,1,2024,0,1
+2024-01-01 08:00:00,CB-A,Classroom Block A,120.5,8,0,1,1,2024,0,1
+2024-01-01 12:00:00,CB-A,Classroom Block A,210.3,12,0,1,1,2024,0,1
+2024-01-01 14:00:00,CB-A,Classroom Block A,285.6,14,0,1,1,2024,0,1
+2024-01-01 16:00:00,CB-A,Classroom Block A,310.4,16,0,1,1,2024,0,1
+2024-01-01 20:00:00,CB-A,Classroom Block A,95.2,20,0,1,1,2024,0,1
+2024-01-01 23:00:00,CB-A,Classroom Block A,50.0,23,0,1,1,2024,0,1
+2024-01-01 00:00:00,LB-B,Laboratory Block B,80.1,0,0,1,1,2024,0,1
+2024-01-01 08:00:00,LB-B,Laboratory Block B,250.4,8,0,1,1,2024,0,1
+2024-01-01 14:00:00,LB-B,Laboratory Block B,420.8,14,0,1,1,2024,0,1
+2024-01-01 16:00:00,LB-B,Laboratory Block B,480.2,16,0,1,1,2024,0,1
+2024-01-01 23:00:00,LB-B,Laboratory Block B,90.5,23,0,1,1,2024,0,1

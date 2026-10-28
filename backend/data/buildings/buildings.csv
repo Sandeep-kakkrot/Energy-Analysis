@@ -1,0 +1,5 @@
+building_code,building_name,building_type,capacity,area_sqft,floors,year_built,ac_units
+CB-A,Classroom Block A,classroom,800,25000,4,2005,20
+LB-B,Laboratory Block B,laboratory,300,18000,3,2010,15
+LIB,Central Library,library,500,22000,5,1998,18
+HST,Hostel Complex,hostel,1200,40000,6,2015,35

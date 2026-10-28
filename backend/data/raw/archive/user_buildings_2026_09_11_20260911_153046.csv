@@ -1,0 +1,5 @@
+timestamp,building_code,building_name,consumption_kwh,hour_of_day,day_of_week,day_of_month,month_num,year_num,is_weekend,is_holiday,type,capacity,area_(sqft),avg_kwh_/_hr,campus_share_(%),energy_intensity_(kwh/sqft)
+2026-09-11 15:30:46.945839,HST,Hostel Complex,849358.37,15,4,11,9,2026,0,0,hostel,1200,45000,48.413,35.85,18.8746
+2026-09-11 15:30:46.945839,LB-B,Laboratory Block B,811214.15,15,4,11,9,2026,0,0,laboratory,300,18000,46.2388,34.24,45.0675
+2026-09-11 15:30:46.945839,CB-A,Classroom Block A,405171.64,15,4,11,9,2026,0,0,classroom,800,25000,23.0893,17.1,16.2069
+2026-09-11 15:30:46.945839,LIB,Central Library,303771.0,15,4,11,9,2026,0,0,library,500,30000,17.3148,12.82,10.1257
