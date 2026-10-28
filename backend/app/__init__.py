@@ -21,10 +21,16 @@ def create_app(env: str = "development") -> Flask:
     # Blueprints
     register_routes(app)
 
-    # Create tables + seed default users on first startup
+    # Create tables + seed default users on first startup (if DB is reachable)
     with app.app_context():
-        db.create_all()
-        _seed_users()
+        try:
+            db.create_all()
+            _seed_users()
+        except Exception as exc:  # pragma: no cover
+            import logging
+            logging.getLogger(__name__).warning(
+                "[startup] DB initialization deferred or failed: %s", exc
+            )
 
     return app
 
